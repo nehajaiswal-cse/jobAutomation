@@ -1,7 +1,7 @@
-import { chromium } from "playwright";
+import puppeteer from "puppeteer";
 
 export async function applyJobs(keyword,resumePath) {
-  const browser = await chromium.launch({
+  const browser = await puppeteer.launch({
   headless: true,
   args: [
     "--no-sandbox",
