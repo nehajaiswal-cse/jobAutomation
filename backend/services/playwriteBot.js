@@ -1,16 +1,16 @@
-import { chromium } from "playwright";
+import { chromium } from "playwright-core";
 
 export async function applyJobs(keyword) {
   const browser = await chromium.launch({
-    headless: false
+    headless: true,
+    executablePath: process.env.CHROMIUM_PATH,
   });
 
   const page = await browser.newPage();
 
+ 
+
   await page.goto(`https://in.indeed.com ${keyword}`);
-
-  await page.fill("input[name='q']",);
-
   await page.click("button[type='submit']");
 
   await page.waitForTimeout(5000);
@@ -20,6 +20,5 @@ export async function applyJobs(keyword) {
   );
 
   await browser.close();
-
   return jobs;
 }

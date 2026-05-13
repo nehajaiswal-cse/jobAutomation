@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "playwright-core": "^1.60.0",
+    "uninstall": "^0.0.0"
+  }
+}
