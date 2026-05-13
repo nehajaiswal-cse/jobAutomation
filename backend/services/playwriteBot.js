@@ -11,7 +11,17 @@ const browser = await puppeteer.launch({
   defaultViewport: chromium.defaultViewport,  
   executablePath: await chromium.executablePath(),
   headless: chromium.headless,
+});await page.waitForSelector("h2.jobTitle span", {
+  timeout: 60000,
 });
+
+const jobs = await page.$$eval(
+  "h2.jobTitle span",
+  nodes =>
+    nodes.slice(0, 5).map(n => ({
+      title: n.innerText
+    }))
+);
   const page = await browser.newPage();
 
   // Example: Indeed (safe portal automation)
