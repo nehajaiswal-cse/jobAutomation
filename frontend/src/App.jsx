@@ -24,15 +24,14 @@ export default function App() {
       formData.append("candidateEmail", email);
       formData.append("resume", resume);
 
-      const res = await axios.post(
-        "http://localhost:5000/api/jobs/apply",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+     const res = await axios.post(
+             "https://jobautomation-6e5p.onrender.com/api/jobs/apply",formData,
+             {
+               headers: {
+                "Content-Type": "multipart/form-data",
+               },
+           }
+          );
 
       console.log(res.data);
 
@@ -92,12 +91,6 @@ export default function App() {
               </p>
             </div>
 
-            <div className="px-5 py-3 bg-white rounded-2xl shadow-md border border-slate-200">
-              <h3 className="font-semibold text-slate-800">AI Automation</h3>
-              <p className="text-sm text-slate-500 mt-1">
-                Smart automated workflow
-              </p>
-            </div>
 
           </div>
         </div>
