@@ -22,31 +22,21 @@ export async function applyJobs(keyword) {
   await page.goto(
     `https://in.indeed.com/jobs?q=${encodeURIComponent(keyword)}`,
     {
-      waitUntil: "domcontentloaded",
+      waitUntil: "networkidle2",
       timeout: 60000,
     }
   );
 
-  await new Promise(resolve =>
-    setTimeout(resolve, 5000)
-  );
+  // page title check
+  const title = await page.title();
+  console.log("PAGE TITLE:", title);
 
-  // NEW SELECTOR
-  await page.waitForSelector("h2.jobTitle span", {
-    timeout: 60000,
-  });
+  // full HTML check
+  const html = await page.content();
 
-  const jobs = await page.$$eval(
-    "h2.jobTitle span",
-    nodes =>
-      nodes.slice(0, 5).map(n => ({
-        title: n.innerText
-      }))
-  );
-
-  console.log(jobs);
+  console.log(html.slice(0, 3000));
 
   await browser.close();
 
-  return jobs;
+  return [{ title }];
 }
