@@ -1,0 +1,31 @@
+# dependencies
+node_modules
+
+# environment variables
+.env
+
+# logs
+logs
+*.log
+npm-debug.log*
+
+# build files
+dist
+build
+
+# uploads
+uploads
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# editor
+.vscode
+
+# Playwright
+playwright-report
+test-results
+
+# cache
+.cache
