@@ -1,30 +1,22 @@
-import puppeteer from 'puppeteer-core';
-import chromium from '@sparticuz/chromium';
+import { chromium } from "playwright";
 
 export async function applyJobs(keyword) {
-  const browser = await puppeteer.launch({
-    args: chromium.args,
-    defaultViewport: chromium.defaultViewport,
-    executablePath: await chromium.executablePath(),
-    headless: chromium.headless,
+  const browser = await chromium.launch({
+    headless: false
   });
 
   const page = await browser.newPage();
 
-  
-  await page.goto(`https://in.indeed.com${keyword}`, {
-    waitUntil: "domcontentloaded"
-  });
+  await page.goto("https://in.indeed.com");
 
-  
+  await page.fill("input[name='q']", keyword);
+
   await page.click("button[type='submit']");
 
-  await page.waitForSelector(".jobTitle", {
-    timeout: 15000
-  });
+  await page.waitForTimeout(5000);
 
   const jobs = await page.$$eval(".jobTitle", nodes =>
-    nodes.slice(0, 5).map(n => n.innerText.trim())
+    nodes.slice(0, 5).map(n => n.innerText)
   );
 
   await browser.close();
