@@ -4,8 +4,10 @@
   "type": "module",
   "description": "",
   "main": "app.js",
+  
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "postinstall": "npx playwright install chromium"
   },
   "keywords": [],
   "author": "",
