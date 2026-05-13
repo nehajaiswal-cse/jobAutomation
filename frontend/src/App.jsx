@@ -37,7 +37,7 @@ export default function App() {
 
       setJobs(res.data.data || []);
     } catch (err) {
-      console.log(err);
+      console.log(err.response.data);
       alert("Automation Failed");
     } finally {
       setLoading(false);
